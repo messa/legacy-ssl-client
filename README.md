@@ -4,6 +4,26 @@ legacy-ssl-client
 Python Requests Session object configured to connect to servers with historical SSL configuration.
 
 
+Installation
+------------
+
+```shell
+$ pip install https://github.com/messa/legacy-ssl-client/archive/master.zip
+```
+
+
+Usage
+-----
+
+```python3
+from legacy_ssl_client.requests import sslv2_session
+
+s = sslv2_session()
+r = s.get('https://example.com')
+r.raise_for_status()
+```
+
+
 Links
 -----
 
