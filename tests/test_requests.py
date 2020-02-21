@@ -1,7 +1,6 @@
 from pytest import mark
 
 
-
 @mark.parametrize('hostname', ['google.com', 'cbaccesscontrol.xdl.dk'])
 def test_sslv2_session(hostname):
     url = 'https://' + hostname
@@ -9,6 +8,7 @@ def test_sslv2_session(hostname):
     s = sslv2_session()
     r = s.get(url)
     r.raise_for_status()
+
 
 @mark.parametrize('hostname', ['google.com', 'cbaccesscontrol.xdl.dk'])
 def test_tlsv1_session(hostname):
