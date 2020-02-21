@@ -28,4 +28,4 @@ jobs:
     - name: Install test requirements
       run: pip install -r requirements-tests.txt
     - name: Test with pytest
-      run: pytest -vv --tb=native
+      run: pytest -vv --tb=native tests
