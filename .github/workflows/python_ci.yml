@@ -32,9 +32,37 @@ jobs:
     - name: Test with pytest
       run: pytest -vv --tb=native tests
 
+  docker_python_35:
+    runs-on: ubuntu-latest
+    container: python:3.5
+    steps:
+      - uses: actions/checkout@v2
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+      - name: Install test requirements
+        run: pip install -r requirements-tests.txt
+      - name: Install the package
+        run: pip install .
+      - name: Test with pytest
+        run: pytest -vv --tb=native tests
+
   docker_python_37:
     runs-on: ubuntu-latest
     container: python:3.7
+    steps:
+      - uses: actions/checkout@v2
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+      - name: Install test requirements
+        run: pip install -r requirements-tests.txt
+      - name: Install the package
+        run: pip install .
+      - name: Test with pytest
+        run: pytest -vv --tb=native tests
+
+  docker_python_38:
+    runs-on: ubuntu-latest
+    container: python:3.8
     steps:
       - uses: actions/checkout@v2
       - name: Install dependencies
