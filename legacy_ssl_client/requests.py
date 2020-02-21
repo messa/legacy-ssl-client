@@ -29,6 +29,8 @@ class SSLv2HTTPAdapter (CustomSSLContextHTTPAdapter):
         ctx = ssl.create_default_context(ssl.Purpose.SERVER_AUTH)
         ctx.options &= ~ssl.OP_NO_SSLv3
         ctx.options &= ~ssl.OP_NO_SSLv2
+        #ctx.minimum_version = ssl.TLSVersion.SSLv3 # SSLv2 is not there...
+        ctx.minimum_version = ssl.TLSVersion.MINIMUM_SUPPORTED
         logger.debug('SSLv2HTTPAdapter ctx.options: %r', ctx.options)
         super().__init__(ssl_context=ctx, **kwargs)
 
@@ -48,6 +50,7 @@ class TLSv1HTTPAdapter (CustomSSLContextHTTPAdapter):
         ctx.options |= ssl.OP_NO_SSLv3
         ctx.options |= ssl.OP_NO_SSLv2
         ctx.options &= ~ssl.OP_NO_TLSv1
+        ctx.minimum_version = ssl.TLSVersion.TLSv1
         logger.debug('TLSv1HTTPAdapter ctx.options: %r', ctx.options)
         super().__init__(ssl_context=ctx, **kwargs)
 
