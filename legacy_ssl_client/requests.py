@@ -32,3 +32,23 @@ def sslv2_session():
     s = Session()
     s.mount('https://', SSLv2HTTPAdapter())
     return s
+
+
+
+class TLSv1HTTPAdapter (CustomSSLContextHTTPAdapter):
+
+    def __init__(self, **kwargs):
+        ctx = ssl.create_default_context(ssl.Purpose.SERVER_AUTH)
+        ctx.options |= ssl.PROTOCOL_TLS
+        ctx.options |= ssl.OP_NO_SSLv3
+        ctx.options |= ssl.OP_NO_SSLv2
+        ctx.options &= ~ssl.OP_NO_TLSv1
+        super().__init__(ssl_context=ctx, **kwargs)
+
+
+def tlsv1_session():
+    s = Session()
+    s.mount('https://', TLSv1HTTPAdapter())
+    return s
+
+
