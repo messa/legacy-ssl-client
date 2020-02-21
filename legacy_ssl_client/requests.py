@@ -1,9 +1,13 @@
+from logging import getLogger
 import ssl
 from urllib3.poolmanager import PoolManager
 from requests import Session
 from requests.adapters import HTTPAdapter
 
 assert HTTPAdapter.init_poolmanager
+
+
+logger = getLogger(__name__)
 
 
 class CustomSSLContextHTTPAdapter (HTTPAdapter):
@@ -25,6 +29,7 @@ class SSLv2HTTPAdapter (CustomSSLContextHTTPAdapter):
         ctx = ssl.create_default_context(ssl.Purpose.SERVER_AUTH)
         ctx.options &= ~ssl.OP_NO_SSLv3
         ctx.options &= ~ssl.OP_NO_SSLv2
+        logger.debug('SSLv2HTTPAdapter ctx.options: %r', ctx.options)
         super().__init__(ssl_context=ctx, **kwargs)
 
 
@@ -43,6 +48,7 @@ class TLSv1HTTPAdapter (CustomSSLContextHTTPAdapter):
         ctx.options |= ssl.OP_NO_SSLv3
         ctx.options |= ssl.OP_NO_SSLv2
         ctx.options &= ~ssl.OP_NO_TLSv1
+        logger.debug('TLSv1HTTPAdapter ctx.options: %r', ctx.options)
         super().__init__(ssl_context=ctx, **kwargs)
 
 
