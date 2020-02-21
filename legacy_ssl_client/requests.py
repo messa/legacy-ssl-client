@@ -42,7 +42,6 @@ def sslv2_session():
     return s
 
 
-
 class TLSv1HTTPAdapter (CustomSSLContextHTTPAdapter):
 
     def __init__(self, **kwargs):
@@ -61,5 +60,3 @@ def tlsv1_session():
     s = Session()
     s.mount('https://', TLSv1HTTPAdapter())
     return s
-
-
