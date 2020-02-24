@@ -11,6 +11,12 @@ Installation
 $ pip install https://github.com/messa/legacy-ssl-client/archive/master.zip
 ```
 
+Or add to requirements.txt:
+
+```
+https://github.com/messa/legacy-ssl-client/archive/v0.0.2.zip#egg=legacy-ssl-client==0.0.2
+```
+
 
 Usage
 -----
